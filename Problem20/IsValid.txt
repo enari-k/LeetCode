@@ -1,0 +1,21 @@
+public class Solution{
+    public bool IsValid(string s){
+        List<char> open_pos = new List<char>{ '(' , '{' , '[' };
+        Stack<char> poses = new();
+        foreach(char pos in s)
+        {
+            if(open_pos.Contains(pos))
+            {
+                poses.Push(pos);
+            }
+            else
+            {
+                if(pos==')'&&poses.Pop()!='(') return false;
+                if(pos=='}'&&poses.Pop()!='{') return false;
+                if(pos==']'&&poses.Pop()!='[') return false;
+            }
+        }
+        if(poses.Count == 0) return true;
+        else return false;
+    }
+}
