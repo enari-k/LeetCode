@@ -107,7 +107,7 @@ public class Solution {
                 openBrackets.Push(c);
                 continue;
             }
-            if(openBrackets.Count == 0||openBrackets.Pop() != closeToOpen[c])
+            if(openBrackets.Count == 0 || openBrackets.Pop() != closeToOpen[c])
             {
                 return false;
             }
