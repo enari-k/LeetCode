@@ -16,11 +16,11 @@ public class Solution {
             head = head.next;
         }
         ListNode dummy = new ListNode(0);
-        ListNode Pointer = dummy;
+        ListNode currentNode = dummy;
         while(Chest.Count != 0)
         {
-            Pointer.next = new ListNode(Chest.Pop());
-            Pointer = Pointer.next;
+            currentNode.next = new ListNode(Chest.Pop());
+            currentNode = currentNode.next;
         }
         return dummy.next;
     }
@@ -34,17 +34,22 @@ public class Solution {
 ```C#
 public class Solution {
     public ListNode ReverseList(ListNode head) {
+        if(head == null)
+        {
+            return head;
+        }
         ListNode PreNode = null;
         ListNode CurrentNode = head;
-        ListNode NextNode = head;
-        while(NextNode != null)
+        ListNode NextNode;
+        while(CurrentNode.next != null)
         {
             NextNode = CurrentNode.next;
             CurrentNode.next = PreNode;
             PreNode = CurrentNode;
             CurrentNode = NextNode;
         }
-        return PreNode;
+        CurrentNode.next = PreNode;
+        return CurrentNode;
     }
 }
 ```
