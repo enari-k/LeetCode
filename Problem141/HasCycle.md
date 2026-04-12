@@ -1,22 +1,25 @@
 ## 問題のリンクはこちらです
+
 https://leetcode.com/problems/linked-list-cycle/
 
 ## Step1(とりあえず解いてみる)
+
 全てをHashSetに格納していき、もう含まれていればfalseそうでなく、Linked Listの末尾まで到達し末尾の一つ後ろがnullなら
 falseを返すような解法。HashMapによるO(1)の高速な検索が使えるHashSetを利用。時間計算量はO(N),空間計算量はO(N)。
 
 ```C#
 public class Solution {
     public bool HasCycle(ListNode head) {
-        HashSet<ListNode> DuplicateFlag = new();
-        while(head != null)
+        HashSet<ListNode> visitedNodes = new();
+        ListNode currentNodes = head;
+        while (currentNodes != null)
         {
-            if(DuplicateFlag.Contains(head))
+            if (visitedNodes.Contains(currentNodes))
             {
                 return true;
             }
-            DuplicateFlag.Add(head);
-            head = head.next;
+            visitedNodes.Add(currentNodes);
+            currentNodes = currentNodes.next;
         }
         return false;
     }
@@ -31,12 +34,12 @@ public class Solution {
         ListNode fast = head;
         ListNode slow = head;
         bool isCycle = false;
-        if(head == null) return false;
-        while(fast.next != null && fast.next.next != null)
+        if (head == null) return false;
+        while (fast.next != null && fast.next.next != null)
         {
             fast = fast.next.next;
             slow = slow.next;
-            if(fast == slow)
+            if (fast == slow)
             {
                 isCycle = true;
                 break;
@@ -48,6 +51,7 @@ public class Solution {
 ```
 
 ## Step2(清書)
+
 参考にしたプルリク
 
 https://github.com/froggyy351/LeetCode_arai60/pull/1/changes
@@ -59,9 +63,9 @@ camelCaseから、最初を小文字にしたほうが良さそうなので、Du
 public class Solution {
     public bool HasCycle(ListNode head) {
         HashSet<ListNode> duplicateFlag = new();
-        while(head != null)
+        while (head != null)
         {
-            if(duplicateFlag.Contains(head))
+            if (duplicateFlag.Contains(head))
             {
                 return true;
             }
@@ -81,12 +85,15 @@ public class Solution {
     public bool HasCycle(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;
-        if(head == null) return false;
-        while(fast.next != null && fast.next.next != null)
+        if (head == null)
+        {
+            return false;
+        }
+        while (fast.next != null && fast.next.next != null)
         {
             fast = fast.next.next;
             slow = slow.next;
-            if(fast == slow)
+            if (fast == slow)
             {
                 return true;
             }
