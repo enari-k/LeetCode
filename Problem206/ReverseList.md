@@ -9,17 +9,17 @@ https://leetcode.com/problems/reverse-linked-list/description/
 ```C#
 public class Solution {
     public ListNode ReverseList(ListNode head) {
-        Stack<int> Chest = new();
+        Stack<int> nodeValues = new();
         while(head != null)
         {
-            Chest.Push(head.val);
+            nodeValues.Push(head.val);
             head = head.next;
         }
         ListNode dummy = new ListNode(0);
         ListNode currentNode = dummy;
-        while(Chest.Count != 0)
+        while(nodeValues.Count != 0)
         {
-            currentNode.next = new ListNode(Chest.Pop());
+            currentNode.next = new ListNode(nodeValues.Pop());
             currentNode = currentNode.next;
         }
         return dummy.next;
@@ -34,7 +34,7 @@ public class Solution {
 ```C#
 public class Solution {
     public ListNode ReverseList(ListNode head) {
-        if(head == null)
+        if(head == null || head.next == null)
         {
             return head;
         }
