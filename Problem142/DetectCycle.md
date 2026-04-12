@@ -5,9 +5,9 @@
 public class Solution {
     public ListNode DetectCycle(ListNode head) {
         HashSet<ListNode> visited_Nodes = new();
-        while(head != null)
+        while (head != null)
         {
-            if(visited_Nodes.Contains(head))
+            if (visited_Nodes.Contains(head))
             {
                 return head;
             }
@@ -41,22 +41,25 @@ public class Solution {
         ListNode fast = head;
         ListNode slow = head;
         bool isCycle = false;
-        if(head == null) return null;
-        while(fast.next != null && fast.next.next != null)
+        if (head == null) return null;
+        while (fast.next != null && fast.next.next != null)
         {
             fast = fast.next.next;
             slow = slow.next;
-            if(fast == slow)
+            if (fast == slow)
             {
                 isCycle = true;
                 break;
             }
         }
-        if(!isCycle) return null;
-        slow = head;
-        while(true)
+        if (!isCycle)
         {
-            if(fast == slow)
+            return null;
+        }
+        slow = head;
+        while (true)
+        {
+            if (fast == slow)
             {
                 return fast;
             }
@@ -79,9 +82,9 @@ C#の変数名はvisited_Nodesなど_で区切るのではなくvisitedNodesと�
 public class Solution {
     public ListNode DetectCycle(ListNode head) {
         HashSet<ListNode> visitedNodes = new();
-        while(head != null)
+        while (head != null)
         {
-            if(visitedNodes.Contains(head))
+            if (visitedNodes.Contains(head))
             {
                 return head;
             }
@@ -101,19 +104,22 @@ public class Solution {
         ListNode fast = head;
         ListNode slow = head;
         bool isCycle = false;
-        while(fast != null && fast.next != null)
+        while (fast != null && fast.next != null)
         {
             fast = fast.next.next;
             slow = slow.next;
-            if(fast == slow)
+            if (fast == slow)
             {
                 isCycle = true;
                 break;
             }
         }
-        if(!isCycle) return null;
+        if (!isCycle)
+        {
+            return null;
+        }
         slow = head;
-        while(fast != slow)
+        while (fast != slow)
         {
             slow = slow.next;
             fast = fast.next;
